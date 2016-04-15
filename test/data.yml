@@ -5,3 +5,39 @@
 #   email: bob@gmail.com
 #   password: secret
 #   fullname: Bob
+
+#Cargo(Presidente):
+#  nome: Presidente
+#
+#Cargo(Diretor):
+#  nome: Diretor
+#
+#Cargo(Gerente):
+#  nome: Gerente
+#
+#Cargo(Supervisor):
+#  nome: Supervisor
+#
+#Cargo(Zoneador1):
+#  nome: Zoneador1
+#
+#Cargo(Zoneador2):
+#  nome: Zoneador2
+#
+#Perfil(PerfilA):
+#  nome: PerfilA
+#
+#Perfil(PerfilB):
+#  nome: PerfilB
+#
+#Perfil(PerfilC):
+#  nome: PerfilC
+#
+#Perfil(PerfilD):
+#  nome: PerfilD
+
+#new Usuario("Breno", "123456789-54", new Date(), Sexo.M, Cargo.busca("Zoneador1"), null).save();
+#new Usuario("Raphael", "987654321-54", new Date(), Sexo.M, Cargo.busca("Zoneador1"), null).save();
+#new Usuario("Tetê", "654987321-12", new Date(), Sexo.F, Cargo.busca("Zoneador1"), null).save();
+#new Usuario("Alberto", "825369741-54", new Date(), Sexo.M, Cargo.busca("Zoneador1"), null).save();
+#new Usuario("Aarão", "132987454-54", new Date(), Sexo.M, Cargo.busca("Zoneador1"), null).save();

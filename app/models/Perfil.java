@@ -4,23 +4,50 @@ import play.data.validation.Required;
 import play.data.validation.Unique;
 import play.db.jpa.GenericModel;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by breno on 07/04/16.
  */
 
 @Entity
+@Table(name = "perfil")
 public class Perfil extends GenericModel{
 
     @Id
-    @GeneratedValue
-    private Integer id;
+    @Column(name="id_perfil")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "perfil_id_perfil_seq")
+    @SequenceGenerator(name = "perfil_id_perfil_seq")
+    public Integer id;
 
+    @Column(name="nome")
     @Required
     @Unique
-    private String nome;
+    public String nome;
 
+    public Perfil(String nome){
+        this.nome = nome;
+    }
+
+    public void adiciona() {
+        this.validateAndSave();
+    }
+
+    public void remove() {
+        this.delete();
+    }
+
+    public void edita(Perfil perfil){
+        this.nome = perfil.nome;
+        this.save();
+    }
+
+    public static Perfil busca(String nome){
+        return Perfil.find("byLikeNome", nome).first();
+    }
+
+    public static List<Perfil> lista(){
+        return Perfil.find("order by nome asc").fetch();
+    }
 }

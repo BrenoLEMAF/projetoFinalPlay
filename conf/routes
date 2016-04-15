@@ -5,6 +5,25 @@
 # Home page
 GET     /                                       Application.index
 
+#Cargos
+GET     /cargo/listar                           Cargos.index
+POST    /cargo/apagar                           Cargos.apagar
+POST    /cargo/editar                           Cargos.editar
+POST    /cargo/salvar                           Cargos.salvar
+
+#Perfis
+GET     /perfil/listar                          Perfis.index
+POST    /perfil/apagar                          Perfis.apagar
+POST    /perfil/editar                          Perfis.editar
+POST    /perfil/salvar                          Perfis.salvar
+
+#Usuarios
+GET     /usuario/listar                         Usuarios.index
+POST    /usuario/apagar                         Usuarios.apagar
+POST    /usuario/restaurar                      Usuarios.restaurar
+POST    /usuario/editar                         Usuarios.editar
+POST    /usuario/salvar                         Usuarios.salvar
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 

@@ -6,4 +6,6 @@
 treinamento.iml
 treinamento.ipr
 treinamento.iws
+treinamento.ids
 .gitignore~
+db_schema~
