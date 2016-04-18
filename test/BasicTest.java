@@ -416,7 +416,7 @@ public class BasicTest extends UnitTest {
 
         List<Usuario> usuarios = Usuario.findAll();
         for (Usuario usuario: usuarios) {
-            usuario.edita("NomeGenerico", usuario.cpf, usuario.dataNascimento, usuario.sexo, usuario.cargo, usuario.perfisUsuario);
+            usuario.edita("NomeGenerico", usuario.cpf, usuario.dataNascimento, usuario.sexo, usuario.cargo, usuario.perfis);
         }
 
         assertEquals(5, Usuario.count());

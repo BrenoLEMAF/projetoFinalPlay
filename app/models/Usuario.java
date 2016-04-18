@@ -48,7 +48,7 @@ public class Usuario extends GenericModel{
     @JoinTable(name="rel_usuario_perfil", joinColumns=
             {@JoinColumn(name="id_usuario")}, inverseJoinColumns=
             {@JoinColumn(name="id_perfil")})
-    public List<Perfil> perfisUsuario;
+    public List<Perfil> perfis;
 
     @Column(name = "fl_ativo")
     public Boolean ativo;
@@ -62,7 +62,7 @@ public class Usuario extends GenericModel{
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
         this.cargo = cargo;
-        this.perfisUsuario = perfisUsuario;
+        this.perfis = perfisUsuario;
         this.ativo = true;
         this.dataCadastro = new Date();
     }
@@ -71,12 +71,12 @@ public class Usuario extends GenericModel{
         this.ativo = true;
         this.dataCadastro = new Date();
         List<Perfil> perfis = new ArrayList<Perfil>();
-        for (Perfil perfil: this.perfisUsuario) {
+        for (Perfil perfil: this.perfis) {
             Perfil perfilBanco = Perfil.findById(perfil.id);
             perfis.add(perfilBanco);
         }
-        this.perfisUsuario.clear();
-        this.perfisUsuario.addAll(perfis);
+        this.perfis.clear();
+        this.perfis.addAll(perfis);
         this.validateAndSave();
     }
 
@@ -96,7 +96,7 @@ public class Usuario extends GenericModel{
         this.dataNascimento = usuario.dataNascimento;
         this.sexo = usuario.sexo;
         this.cargo = usuario.cargo;
-        this.perfisUsuario = usuario.perfisUsuario;
+        this.perfis = usuario.perfis;
         this.validateAndSave();
     }
 
@@ -112,29 +112,30 @@ public class Usuario extends GenericModel{
         }
     }
 
-    public static List<Usuario> listaPorPerfil(boolean ativo, Perfil... perfis){
-        if (ativo){
-            return Usuario.find("select distinct u from Usuario u join u.perfisUsuario as p " +
-                    "where u.ativo = ? and p in (:perfis) " +
-                    "group by u.id, u.nome, u.cpf, u.dataNascimento, u.sexo, u.cargo, u.situacao, u.dataCadastro " +
-                    "having count(p.id) = :size"
-            , true).bind("perfis", perfis).bind("size", perfis.length).fetch();
-        } else {
-            return Usuario.find("select distinct u from Usuario u join u.perfisUsuario as p " +
-                            "where p in (:perfis) " +
-                            "group by u.id, u.nome, u.cpf, u.dataNascimento, u.sexo, u.cargo, u.situacao, u.dataCadastro " +
-                            "having count(p.id) = :size"
-                    ).bind("perfis", perfis).bind("size", perfis.length).fetch();
-        }
+//    public static List<Usuario> listaPorPerfil(boolean ativo, Perfil... perfis){
+//        if (ativo){
+//            return Usuario.find("select distinct u from Usuario u join u.perfis as p " +
+//                    "where u.ativo = ? and p in (:perfis) " +
+//                    "group by u.id, u.nome, u.cpf, u.dataNascimento, u.sexo, u.cargo, u.situacao, u.dataCadastro " +
+//                    "having count(p.id) = :size"
+//            , true).bind("perfis", perfis).bind("size", perfis.length).fetch();
+//        } else {
+//            return Usuario.find("select distinct u from Usuario u join u.perfis as p " +
+//                            "where p in (:perfis) " +
+//                            "group by u.id, u.nome, u.cpf, u.dataNascimento, u.sexo, u.cargo, u.situacao, u.dataCadastro " +
+//                            "having count(p.id) = :size"
+//                    ).bind("perfis", perfis).bind("size", perfis.length).fetch();
+//        }
+//    }
 
-        //return Usuario.find("perfisUsuario in :perfis").setParameter("perfis",perfis).fetch();
+    public static List<Usuario> listaPorPerfil(boolean ativo, Perfil perfil) {
+        return Usuario.find("select distinct u from Usuario u join u.perfis as p where p.id = ? and u.ativo = ?", perfil.id, ativo).fetch();
     }
 
 
-    public static List<Usuario> listaPorPerfilSimplificado(List<Perfil> ids){
-
-        return Usuario.find("perfisUsuario in (:perfis)").setParameter("perfis",ids).fetch();
-    }
+//    public static List<Usuario> listaPorPerfilSimplificado (Perfil perfil){
+//        return Usuario.find("perfis in (:perfil)").setParameter("perfil",perfil).fetch();
+//    }
 
     public static List<Usuario> listaPorCargo(boolean ativo, Cargo cargo){
         if (ativo) {

@@ -26,6 +26,9 @@ public class Perfil extends GenericModel{
     @Unique
     public String nome;
 
+//    @ManyToMany(cascade=CascadeType.ALL, mappedBy="perfis")
+//    public List<Usuario> Usuarios;
+
     public Perfil(String nome){
         this.nome = nome;
     }
@@ -50,4 +53,8 @@ public class Perfil extends GenericModel{
     public static List<Perfil> lista(){
         return Perfil.find("order by nome asc").fetch();
     }
+
+//    public List<Usuario> listaUsuarios() {
+//        return this.Usuarios;
+//    }
 }

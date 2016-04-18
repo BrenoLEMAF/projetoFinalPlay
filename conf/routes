@@ -19,6 +19,9 @@ POST    /perfil/salvar                          Perfis.salvar
 
 #Usuarios
 GET     /usuario/listar                         Usuarios.index
+POST    /usuario/listar/nome                    Usuarios.listarNome
+POST    /usuario/listar/perfil                  Usuarios.listarPerfil
+POST    /usuario/listar/cargo                   Usuarios.listarCargo
 POST    /usuario/apagar                         Usuarios.apagar
 POST    /usuario/restaurar                      Usuarios.restaurar
 POST    /usuario/editar                         Usuarios.editar

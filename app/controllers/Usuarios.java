@@ -1,8 +1,10 @@
 package controllers;
 
+import models.Cargo;
 import models.Perfil;
 import models.Usuario;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -15,9 +17,16 @@ public class Usuarios extends DefaultController{
         renderJSON(usuarios);
     }
 
-    public static void findUsuariosByPerfis(){
-        Perfil perf1 = Perfil.busca("Perfil A");
-        Usuario.listaPorPerfil(true,perf1);
+    public static void listarNome(String nome){
+        Usuario.listaPorNome(true, nome);
+    }
+
+    public static void listarPerfil(Perfil perfil){
+        renderJSON(Usuario.listaPorPerfil(true, perfil));
+    }
+
+    public static void listarCargo(Cargo cargo){
+        renderJSON(Usuario.listaPorCargo(true, cargo));
     }
 
     public static void salvar(Usuario usuario) {
